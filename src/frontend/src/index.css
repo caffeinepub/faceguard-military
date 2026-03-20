@@ -1,0 +1,142 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 8% 0.04 243;
+    --foreground: 95% 0.015 243;
+    --card: 13% 0.045 243;
+    --card-foreground: 95% 0.015 243;
+    --popover: 13% 0.045 243;
+    --popover-foreground: 95% 0.015 243;
+    --primary: 56% 0.19 262;
+    --primary-foreground: 100% 0 0;
+    --secondary: 18% 0.055 243;
+    --secondary-foreground: 72% 0.04 243;
+    --muted: 16% 0.05 243;
+    --muted-foreground: 65% 0.05 243;
+    --accent: 56% 0.19 262;
+    --accent-foreground: 100% 0 0;
+    --destructive: 55% 0.19 22;
+    --destructive-foreground: 100% 0 0;
+    --border: 26% 0.065 243;
+    --input: 22% 0.06 243;
+    --ring: 56% 0.19 262;
+    --success: 70% 0.19 147;
+    --warning: 72% 0.19 70;
+    --radius: 0.625rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Inter", sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: oklch(var(--muted));
+  }
+  ::-webkit-scrollbar-thumb {
+    background: oklch(var(--border));
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: oklch(var(--primary));
+  }
+}
+
+@layer utilities {
+  .text-glow-blue {
+    text-shadow: 0 0 20px oklch(56% 0.19 262 / 0.6), 0 0 40px
+      oklch(56% 0.19 262 / 0.3);
+  }
+  .box-glow-blue {
+    box-shadow: 0 0 20px oklch(56% 0.19 262 / 0.3), 0 0 40px
+      oklch(56% 0.19 262 / 0.15);
+  }
+  .box-glow-green {
+    box-shadow: 0 0 12px oklch(70% 0.19 147 / 0.5);
+  }
+  .live-pulse::before {
+    content: "";
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: oklch(70% 0.19 147);
+    margin-right: 4px;
+    animation: pulse-dot 1.5s ease-in-out infinite;
+  }
+  .scan-line {
+    animation: scan 3s linear infinite;
+  }
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(0.85);
+  }
+}
+
+@keyframes scan {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
+@keyframes blink-border {
+  0%,
+  100% {
+    border-color: oklch(70% 0.19 147);
+  }
+  50% {
+    border-color: oklch(70% 0.19 147 / 0.4);
+  }
+}
+
+@keyframes float-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-float-in {
+  animation: float-in 0.4s ease-out forwards;
+}
+
+.camera-active-border {
+  animation: blink-border 2s ease-in-out infinite;
+}
